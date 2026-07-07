@@ -1,6 +1,6 @@
 # My Todos
 
-A simple Todo List application built using React and Vite.
+A simple Todo List application built using React and Vite
 
 ## Installation
 
@@ -19,7 +19,7 @@ npm run dev
 ```
 
 Open your browser:
-
+and type the below
 ```text
 http://localhost:5173/
 ```
