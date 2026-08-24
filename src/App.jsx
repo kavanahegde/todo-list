@@ -1,22 +1,29 @@
+import { useState } from "react";
 import "./App.css";
+import Header from "./shared/Header.jsx";
+import TodosPage from "./features/Todos/TodosPage.jsx";
+import Logon from "./features/Logon.jsx";
 
 function App() {
-  const todoList = [
-    { id: 1, title: "Review resources" },
-    { id: 2, title: "Take notes" },
-    { id: 3, title: "Code out app" },
-  ];
+  const [, setEmail] = useState("");
+  const [token, setToken] = useState("");
 
   return (
     <div>
-      <h1>My Todos</h1>
+      <Header
+        token={token}
+        onSetToken={setToken}
+        onSetEmail={setEmail}
+      />
 
-      <ul>
-        {todoList.map((todo) => (
-          <li key={todo.id}>{todo.title}</li>
-        ))}
-      </ul>
-
+      {token ? (
+        <TodosPage token={token} />
+      ) : (
+        <Logon
+          onSetEmail={setEmail}
+          onSetToken={setToken}
+        />
+      )}
     </div>
   );
 }
