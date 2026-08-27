@@ -1,22 +1,21 @@
 import "./App.css";
+import Header from "./shared/Header.jsx";
+import TodosPage from "./features/Todos/TodosPage.jsx";
+import Logon from "./features/Logon.jsx";
+import { useAuth } from "./contexts/AuthContext.jsx";
 
 function App() {
-  const todoList = [
-    { id: 1, title: "Review resources" },
-    { id: 2, title: "Take notes" },
-    { id: 3, title: "Code out app" },
-  ];
+  const { isAuthenticated } = useAuth();
 
   return (
     <div>
-      <h1>My Todos</h1>
+      <Header />
 
-      <ul>
-        {todoList.map((todo) => (
-          <li key={todo.id}>{todo.title}</li>
-        ))}
-      </ul>
-
+      {isAuthenticated ? (
+        <TodosPage />
+      ) : (
+        <Logon />
+      )}
     </div>
   );
 }
