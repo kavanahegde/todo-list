@@ -1,28 +1,20 @@
-import { useState } from "react";
 import "./App.css";
 import Header from "./shared/Header.jsx";
 import TodosPage from "./features/Todos/TodosPage.jsx";
 import Logon from "./features/Logon.jsx";
+import { useAuth } from "./contexts/AuthContext.jsx";
 
 function App() {
-  const [, setEmail] = useState("");
-  const [token, setToken] = useState("");
+  const { isAuthenticated } = useAuth();
 
   return (
     <div>
-      <Header
-        token={token}
-        onSetToken={setToken}
-        onSetEmail={setEmail}
-      />
+      <Header />
 
-      {token ? (
-        <TodosPage token={token} />
+      {isAuthenticated ? (
+        <TodosPage />
       ) : (
-        <Logon
-          onSetEmail={setEmail}
-          onSetToken={setToken}
-        />
+        <Logon />
       )}
     </div>
   );
