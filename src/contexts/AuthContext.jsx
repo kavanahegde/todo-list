@@ -17,8 +17,11 @@ export function useAuth() {
 export function AuthProvider({ children }) {
   const [email, setEmail] = useState("");
   const [token, setToken] = useState("");
+  const [authError, setAuthError] = useState("");
 
   const login = async (userEmail, password) => {
+    setAuthError("");
+
     try {
       const options = {
         method: "POST",
@@ -48,21 +51,31 @@ export function AuthProvider({ children }) {
         };
       }
 
+      const message = `Authentication failed: ${
+        data?.message ?? "Unknown error"
+      }`;
+
+      setAuthError(message);
+
       return {
         success: false,
-        error: `Authentication failed: ${
-          data?.message ?? "Unknown error"
-        }`,
+        error: message,
       };
     } catch {
+      const message = "Network error during login";
+
+      setAuthError(message);
+
       return {
         success: false,
-        error: "Network error during login",
+        error: message,
       };
     }
   };
 
   const logout = async () => {
+    setAuthError("");
+
     if (!token) {
       setEmail("");
       setToken("");
@@ -73,38 +86,39 @@ export function AuthProvider({ children }) {
     }
 
     try {
-      const response = await fetch("/api/user/logoff", {
+      await fetch("/api/user/logoff", {
         method: "POST",
         headers: {
           "X-CSRF-TOKEN": token,
         },
         credentials: "include",
       });
-
-      if (!response.ok) {
-        throw new Error("Failed to log out");
-      }
-
-      return {
-        success: true,
-      };
-    } catch (error) {
-      return {
-        success: false,
-        error: error.message,
-      };
+    } catch {
+      // Local authentication should still be cleared
+      // even if the logout request fails.
     } finally {
       setEmail("");
       setToken("");
+      setAuthError("");
     }
+
+    return {
+      success: true,
+    };
+  };
+
+  const clearAuthError = () => {
+    setAuthError("");
   };
 
   const value = {
     email,
     token,
     isAuthenticated: !!token,
+    authError,
     login,
     logout,
+    clearAuthError,
   };
 
   return (
