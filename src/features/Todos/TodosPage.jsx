@@ -102,6 +102,7 @@ function TodosPage() {
     sortBy,
     sortDirection,
     debouncedFilterTerm,
+    dataVersion,
   ]);
 
   const handleFilterChange = (newTerm) => {

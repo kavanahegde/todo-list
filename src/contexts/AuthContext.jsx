@@ -17,11 +17,8 @@ export function useAuth() {
 export function AuthProvider({ children }) {
   const [email, setEmail] = useState("");
   const [token, setToken] = useState("");
-  const [authError, setAuthError] = useState("");
 
   const login = async (userEmail, password) => {
-    setAuthError("");
-
     try {
       const options = {
         method: "POST",
@@ -51,31 +48,21 @@ export function AuthProvider({ children }) {
         };
       }
 
-      const message = `Authentication failed: ${
-        data?.message ?? "Unknown error"
-      }`;
-
-      setAuthError(message);
-
       return {
         success: false,
-        error: message,
+        error: `Authentication failed: ${
+          data?.message ?? "Unknown error"
+        }`,
       };
     } catch {
-      const message = "Network error during login";
-
-      setAuthError(message);
-
       return {
         success: false,
-        error: message,
+        error: "Network error during login",
       };
     }
   };
 
   const logout = async () => {
-    setAuthError("");
-
     if (!token) {
       setEmail("");
       setToken("");
@@ -86,39 +73,41 @@ export function AuthProvider({ children }) {
     }
 
     try {
-      await fetch("/api/user/logoff", {
+      const response = await fetch("/api/user/logoff", {
         method: "POST",
         headers: {
           "X-CSRF-TOKEN": token,
         },
         credentials: "include",
       });
+
+      if (!response.ok) {
+        return {
+          success: false,
+          error: "Failed to log out",
+        };
+      }
+
+      return {
+        success: true,
+      };
     } catch {
-      // Local authentication should still be cleared
-      // even if the logout request fails.
+      return {
+        success: false,
+        error: "Network error during logout",
+      };
     } finally {
       setEmail("");
       setToken("");
-      setAuthError("");
     }
-
-    return {
-      success: true,
-    };
-  };
-
-  const clearAuthError = () => {
-    setAuthError("");
   };
 
   const value = {
     email,
     token,
     isAuthenticated: !!token,
-    authError,
     login,
     logout,
-    clearAuthError,
   };
 
   return (
