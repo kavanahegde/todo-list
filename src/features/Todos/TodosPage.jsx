@@ -78,9 +78,9 @@ function TodosPage() {
         });
       } catch (error) {
         const isFilterError =
-          debouncedFilterTerm ||
+          Boolean(debouncedFilterTerm) ||
           sortBy !== "createdAt" ||
-          sortDirection !== "desc";
+          sortDirection !== "asc";
 
         dispatch({
           type: TODO_ACTIONS.FETCH_ERROR,
@@ -321,6 +321,7 @@ function TodosPage() {
             type: TODO_ACTIONS.SET_SORT,
             payload: {
               sortBy: newSortBy,
+              sortDirection,
             },
           })
         }
@@ -328,6 +329,7 @@ function TodosPage() {
           dispatch({
             type: TODO_ACTIONS.SET_SORT,
             payload: {
+              sortBy,
               sortDirection: newSortDirection,
             },
           })

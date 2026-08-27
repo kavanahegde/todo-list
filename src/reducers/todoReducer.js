@@ -28,9 +28,9 @@ export const TODO_ACTIONS = {
     todoList: [],
     error: "",
     filterError: "",
-    isTodoListLoading: false,
+    isTodoListLoading: true,
     sortBy: "createdAt",
-    sortDirection: "desc",
+    sortDirection: "asc",
     filterTerm: "",
     dataVersion: 0,
   };
@@ -82,6 +82,7 @@ export const TODO_ACTIONS = {
               : todo
           ),
           dataVersion: state.dataVersion + 1,
+          error: "",
         };
   
       case TODO_ACTIONS.ADD_TODO_ERROR:
@@ -111,6 +112,7 @@ export const TODO_ACTIONS = {
         return {
           ...state,
           dataVersion: state.dataVersion + 1,
+          error: "",
         };
   
       case TODO_ACTIONS.COMPLETE_TODO_ERROR:
@@ -139,6 +141,7 @@ export const TODO_ACTIONS = {
         return {
           ...state,
           dataVersion: state.dataVersion + 1,
+          error: "",
         };
   
       case TODO_ACTIONS.UPDATE_TODO_ERROR:
@@ -155,15 +158,16 @@ export const TODO_ACTIONS = {
       case TODO_ACTIONS.SET_SORT:
         return {
           ...state,
-          sortBy: action.payload.sortBy ?? state.sortBy,
-          sortDirection:
-            action.payload.sortDirection ?? state.sortDirection,
+          sortBy: action.payload.sortBy,
+          sortDirection: action.payload.sortDirection,
+          filterError: "",
         };
   
       case TODO_ACTIONS.SET_FILTER:
         return {
           ...state,
           filterTerm: action.payload.filterTerm,
+          filterError: "",
         };
   
       case TODO_ACTIONS.CLEAR_ERROR:
@@ -183,7 +187,7 @@ export const TODO_ACTIONS = {
           ...state,
           filterTerm: "",
           sortBy: "createdAt",
-          sortDirection: "desc",
+          sortDirection: "asc",
           filterError: "",
         };
   
