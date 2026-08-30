@@ -6,13 +6,26 @@ function TodoList({
   onCompleteTodo,
   onUpdateTodo,
   dataVersion,
+  statusFilter = "all",
 }) {
   const filteredTodoList = useMemo(() => {
+    const todos = todoList.filter((todo) => {
+      if (statusFilter === "active") {
+        return !todo.isCompleted;
+      }
+
+      if (statusFilter === "completed") {
+        return todo.isCompleted;
+      }
+
+      return true;
+    });
+
     return {
       version: dataVersion,
-      todos: todoList.filter((todo) => !todo.isCompleted),
+      todos,
     };
-  }, [todoList, dataVersion]);
+  }, [todoList, dataVersion, statusFilter]);
 
   return filteredTodoList.todos.length === 0 ? (
     <p>Add todo above to get started</p>

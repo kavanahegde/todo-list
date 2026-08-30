@@ -1,0 +1,76 @@
+import { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router";
+import { useAuth } from "../contexts/AuthContext.jsx";
+
+function LoginPage() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [authError, setAuthError] = useState("");
+  const [isLoggingOn, setIsLoggingOn] = useState(false);
+
+  const { login, isAuthenticated } = useAuth();
+
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // Get the page the user originally wanted to visit.
+  // If there isn't one, go to /todos after login.
+  const from = location.state?.from?.pathname || "/todos";
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate(from, { replace: true });
+    }
+  }, [isAuthenticated, navigate, from]);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    setIsLoggingOn(true);
+    setAuthError("");
+
+    const result = await login(email, password);
+
+    if (!result.success) {
+      setAuthError(result.error);
+    }
+
+    setIsLoggingOn(false);
+  };
+
+  return (
+    <div>
+      {authError && <p>{authError}</p>}
+
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label htmlFor="email">Email</label>
+          <input
+            id="email"
+            type="email"
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
+            required
+          />
+        </div>
+
+        <div>
+          <label htmlFor="password">Password</label>
+          <input
+            id="password"
+            type="password"
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+            required
+          />
+        </div>
+
+        <button type="submit" disabled={isLoggingOn}>
+          {isLoggingOn ? "Logging in..." : "Log On"}
+        </button>
+      </form>
+    </div>
+  );
+}
+
+export default LoginPage;
