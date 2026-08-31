@@ -1,23 +1,49 @@
 import "./App.css";
+import { Routes, Route } from "react-router";
+
+import HomePage from "./pages/HomePage.jsx";
+import AboutPage from "./pages/AboutPage.jsx";
+import LoginPage from "./pages/LoginPage.jsx";
+import TodosPage from "./pages/TodosPage.jsx";
+import ProfilePage from "./pages/ProfilePage.jsx";
+import NotFoundPage from "./pages/NotFoundPage.jsx";
+
+import RequireAuth from "./components/RequireAuth.jsx";
+import Header from "./shared/Header.jsx";
 
 function App() {
-  const todoList = [
-    { id: 1, title: "Review resources" },
-    { id: 2, title: "Take notes" },
-    { id: 3, title: "Code out app" },
-  ];
-
   return (
-    <div>
-      <h1>My Todos</h1>
+    <>
+      <Header />
 
-      <ul>
-        {todoList.map((todo) => (
-          <li key={todo.id}>{todo.title}</li>
-        ))}
-      </ul>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
 
-    </div>
+        <Route path="/about" element={<AboutPage />} />
+
+        <Route path="/login" element={<LoginPage />} />
+
+        <Route
+          path="/todos"
+          element={
+            <RequireAuth>
+              <TodosPage />
+            </RequireAuth>
+          }
+        />
+
+        <Route
+          path="/profile"
+          element={
+            <RequireAuth>
+              <ProfilePage />
+            </RequireAuth>
+          }
+        />
+
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
+    </>
   );
 }
 
