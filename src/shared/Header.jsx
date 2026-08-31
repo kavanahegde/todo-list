@@ -1,18 +1,9 @@
-import { useNavigate } from "react-router";
 import { useAuth } from "../contexts/AuthContext.jsx";
 import Navigation from "./Navigation.jsx";
+import Logoff from "../features/Logoff.jsx";
 
 function Header() {
-  const { isAuthenticated, logout } = useAuth();
-  const navigate = useNavigate();
-
-  const handleLogOff = async () => {
-    const result = await logout();
-
-    if (result.success) {
-      navigate("/login");
-    }
-  };
+  const { isAuthenticated } = useAuth();
 
   return (
     <header>
@@ -20,11 +11,7 @@ function Header() {
 
       <Navigation />
 
-      {isAuthenticated && (
-        <button type="button" onClick={handleLogOff}>
-          Log Off
-        </button>
-      )}
+      {isAuthenticated && <Logoff />}
     </header>
   );
 }

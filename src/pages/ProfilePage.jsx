@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../contexts/AuthContext.jsx";
 
 function ProfilePage() {
-  const { name, token } = useAuth();
+  const { email, token } = useAuth();
 
   const [todoStats, setTodoStats] = useState({
     total: 0,
@@ -56,9 +56,7 @@ function ProfilePage() {
           active,
         });
       } catch (error) {
-        setError(
-          `Error loading statistics: ${error.message}`
-        );
+        setError(`Error loading statistics: ${error.message}`);
       } finally {
         setLoading(false);
       }
@@ -80,7 +78,7 @@ function ProfilePage() {
 
       <section>
         <h3>Account Information</h3>
-        <p>Name: {name || "User"}</p>
+        <p>Name: {email || "User"}</p>
         <p>Status: Authenticated</p>
       </section>
 
@@ -88,7 +86,6 @@ function ProfilePage() {
         <h3>Todo Statistics</h3>
 
         {loading && <p>Loading statistics...</p>}
-
         {error && <p>{error}</p>}
 
         {!loading && !error && (

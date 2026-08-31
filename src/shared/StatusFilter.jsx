@@ -28,9 +28,9 @@ function StatusFilter() {
           handleStatusChange(event.target.value)
         }
       >
-        <option value="all">All</option>
-        <option value="active">Active</option>
-        <option value="completed">Completed</option>
+        <option value="all">All Todos</option>
+        <option value="active">Active Todos</option>
+        <option value="completed">Completed Todos</option>
       </select>
     </div>
   );

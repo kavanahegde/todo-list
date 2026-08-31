@@ -18,6 +18,10 @@ function NotFoundPage() {
       <p>
         <Link to="/todos">Go to Todos</Link>
       </p>
+
+      <p>
+        <Link to="/login">Go to Login</Link>
+      </p>
     </div>
   );
 }
