@@ -2,27 +2,30 @@ import { Link } from "react-router";
 
 function NotFoundPage() {
   return (
-    <div>
-      <h2>404 - Page Not Found</h2>
+    <main className="not-found-page">
+      <section className="not-found-card">
+        <p className="error-code">404</p>
 
-      <p>The page you are looking for does not exist.</p>
+        <h2>Page Not Found</h2>
 
-      <p>
-        <Link to="/">Go to Home</Link>
-      </p>
+        <p className="page-description">
+          Sorry, the page you are looking for does not exist or may
+          have been moved.
+        </p>
 
-      <p>
-        <Link to="/about">Go to About</Link>
-      </p>
+        <div className="not-found-links">
+          <Link className="primary-link" to="/">
+            Go to Home
+          </Link>
 
-      <p>
-        <Link to="/todos">Go to Todos</Link>
-      </p>
+          <Link to="/about">About</Link>
 
-      <p>
-        <Link to="/login">Go to Login</Link>
-      </p>
-    </div>
+          <Link to="/todos">Todos</Link>
+
+          <Link to="/login">Login</Link>
+        </div>
+      </section>
+    </main>
   );
 }
 

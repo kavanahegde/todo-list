@@ -73,37 +73,69 @@ function ProfilePage() {
       : 0;
 
   return (
-    <div>
-      <h2>Profile</h2>
-
-      <section>
-        <h3>Account Information</h3>
-        <p>Name: {email || "User"}</p>
-        <p>Status: Authenticated</p>
+    <main className="page-container profile-page">
+      <section className="page-hero">
+        <p className="eyebrow">Your workspace</p>
+        <h2>Profile</h2>
+        <p className="page-description">
+          Review your account information and task progress.
+        </p>
       </section>
 
-      <section>
-        <h3>Todo Statistics</h3>
+      <div className="info-grid">
+        <section className="info-card">
+          <h3>Account Information</h3>
 
-        {loading && <p>Loading statistics...</p>}
-        {error && <p>{error}</p>}
+          <div className="account-details">
+            <p>
+              <span>Name</span>
+              <strong>{email || "User"}</strong>
+            </p>
 
-        {!loading && !error && (
-          <div>
-            <p>Total Todos: {todoStats.total}</p>
-            <p>Completed Todos: {todoStats.completed}</p>
-            <p>Active Todos: {todoStats.active}</p>
-
-            {todoStats.total > 0 && (
-              <p>
-                Completion Percentage:{" "}
-                {completionPercentage}%
-              </p>
-            )}
+            <p>
+              <span>Status</span>
+              <strong>Authenticated</strong>
+            </p>
           </div>
-        )}
-      </section>
-    </div>
+        </section>
+
+        <section className="info-card">
+          <h3>Todo Statistics</h3>
+
+          {loading && <p>Loading statistics...</p>}
+
+          {error && (
+            <p className="error-message" role="alert">
+              {error}
+            </p>
+          )}
+
+          {!loading && !error && (
+            <div className="stats-grid">
+              <article className="stat-card">
+                <span>Total</span>
+                <strong>{todoStats.total}</strong>
+              </article>
+
+              <article className="stat-card">
+                <span>Completed</span>
+                <strong>{todoStats.completed}</strong>
+              </article>
+
+              <article className="stat-card">
+                <span>Active</span>
+                <strong>{todoStats.active}</strong>
+              </article>
+
+              <article className="stat-card">
+                <span>Completion</span>
+                <strong>{completionPercentage}%</strong>
+              </article>
+            </div>
+          )}
+        </section>
+      </div>
+    </main>
   );
 }
 

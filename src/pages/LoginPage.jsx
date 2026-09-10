@@ -39,37 +39,59 @@ function LoginPage() {
   };
 
   return (
-    <div>
-      {authError && <p>{authError}</p>}
-
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="email">Email</label>
-          <input
-            id="email"
-            type="email"
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
-            required
-          />
+    <main className="login-page">
+      <section className="login-card">
+        <div className="login-heading">
+          <p className="eyebrow">Welcome back</p>
+          <h2>Log in to your account</h2>
+          <p>
+            Sign in to manage your todos and track your progress.
+          </p>
         </div>
 
-        <div>
-          <label htmlFor="password">Password</label>
-          <input
-            id="password"
-            type="password"
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-            required
-          />
-        </div>
+        {authError && (
+          <p className="error-message" role="alert">
+            {authError}
+          </p>
+        )}
 
-        <button type="submit" disabled={isLoggingOn}>
-          {isLoggingOn ? "Logging in..." : "Log On"}
-        </button>
-      </form>
-    </div>
+        <form className="login-form" onSubmit={handleSubmit}>
+          <div className="form-field">
+            <label htmlFor="email">Email</label>
+
+            <input
+              id="email"
+              type="email"
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+              autoComplete="email"
+              required
+            />
+          </div>
+
+          <div className="form-field">
+            <label htmlFor="password">Password</label>
+
+            <input
+              id="password"
+              type="password"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+              autoComplete="current-password"
+              required
+            />
+          </div>
+
+          <button
+            className="login-button"
+            type="submit"
+            disabled={isLoggingOn}
+          >
+            {isLoggingOn ? "Logging in..." : "Log On"}
+          </button>
+        </form>
+      </section>
+    </main>
   );
 }
 

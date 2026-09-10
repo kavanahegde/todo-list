@@ -181,10 +181,14 @@ function TodosPage() {
       return;
     }
 
+    const updatedCompletionStatus =
+      !originalTodo.isCompleted;
+
     dispatch({
       type: TODO_ACTIONS.COMPLETE_TODO_START,
       payload: {
         id,
+        isCompleted: updatedCompletionStatus,
       },
     });
 
@@ -197,12 +201,12 @@ function TodosPage() {
         },
         credentials: "include",
         body: JSON.stringify({
-          isCompleted: true,
+          isCompleted: updatedCompletionStatus,
         }),
       });
 
       if (!response.ok) {
-        throw new Error("Failed to complete todo");
+        throw new Error("Failed to update todo status");
       }
 
       dispatch({
@@ -270,10 +274,61 @@ function TodosPage() {
     }
   };
 
+  const deleteTodo = async (id) => {
+    const originalTodo = todoList.find(
+      (todo) => todo.id === id
+    );
+
+    if (!originalTodo) {
+      return;
+    }
+
+    dispatch({
+      type: TODO_ACTIONS.DELETE_TODO_START,
+      payload: {
+        id,
+      },
+    });
+
+    try {
+      const response = await fetch(`/api/tasks/${id}`, {
+        method: "DELETE",
+        headers: {
+          "X-CSRF-TOKEN": token,
+        },
+        credentials: "include",
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to delete todo");
+      }
+
+      dispatch({
+        type: TODO_ACTIONS.DELETE_TODO_SUCCESS,
+      });
+    } catch (error) {
+      dispatch({
+        type: TODO_ACTIONS.DELETE_TODO_ERROR,
+        payload: {
+          originalTodo,
+          message: error.message,
+        },
+      });
+    }
+  };
+
   return (
-    <div>
+    <main className="page-container todos-page">
+      <section className="page-hero">
+        <p className="eyebrow">Task manager</p>
+        <h2>My Todos</h2>
+        <p className="page-description">
+          Organize your tasks, track progress, and stay focused.
+        </p>
+      </section>
+
       {error && (
-        <div>
+        <div className="message-card error-card" role="alert">
           <p>{error}</p>
 
           <button
@@ -290,75 +345,112 @@ function TodosPage() {
       )}
 
       {filterError && (
-        <div>
+        <div className="message-card error-card" role="alert">
           <p>{filterError}</p>
 
-          <button
-            type="button"
-            onClick={() =>
-              dispatch({
-                type: TODO_ACTIONS.CLEAR_FILTER_ERROR,
-              })
-            }
-          >
-            Clear Filter Error
-          </button>
+          <div className="message-actions">
+            <button
+              type="button"
+              onClick={() =>
+                dispatch({
+                  type: TODO_ACTIONS.CLEAR_FILTER_ERROR,
+                })
+              }
+            >
+              Clear Error
+            </button>
 
-          <button
-            type="button"
-            onClick={() =>
-              dispatch({
-                type: TODO_ACTIONS.RESET_FILTERS,
-              })
-            }
-          >
-            Reset Filters
-          </button>
+            <button
+              type="button"
+              onClick={() =>
+                dispatch({
+                  type: TODO_ACTIONS.RESET_FILTERS,
+                })
+              }
+            >
+              Reset Filters
+            </button>
+          </div>
         </div>
       )}
 
-      {isTodoListLoading && <p>Loading todos...</p>}
+      <section className="todo-panel">
+        <div className="section-heading">
+          <h3>Find and organize</h3>
+          <p>Search, sort, and filter your todo list.</p>
+        </div>
 
-      <SortBy
-        sortBy={sortBy}
-        sortDirection={sortDirection}
-        onSortByChange={(newSortBy) =>
-          dispatch({
-            type: TODO_ACTIONS.SET_SORT,
-            payload: {
-              sortBy: newSortBy,
-              sortDirection,
-            },
-          })
-        }
-        onSortDirectionChange={(newSortDirection) =>
-          dispatch({
-            type: TODO_ACTIONS.SET_SORT,
-            payload: {
-              sortBy,
-              sortDirection: newSortDirection,
-            },
-          })
-        }
-      />
+        <div className="todo-controls">
+          <div className="search-control">
+            <FilterInput
+              filterTerm={filterTerm}
+              onFilterChange={handleFilterChange}
+            />
+          </div>
 
-      <FilterInput
-        filterTerm={filterTerm}
-        onFilterChange={handleFilterChange}
-      />
+          <div className="filter-grid">
+            <SortBy
+              sortBy={sortBy}
+              sortDirection={sortDirection}
+              onSortByChange={(newSortBy) =>
+                dispatch({
+                  type: TODO_ACTIONS.SET_SORT,
+                  payload: {
+                    sortBy: newSortBy,
+                    sortDirection,
+                  },
+                })
+              }
+              onSortDirectionChange={(newSortDirection) =>
+                dispatch({
+                  type: TODO_ACTIONS.SET_SORT,
+                  payload: {
+                    sortBy,
+                    sortDirection: newSortDirection,
+                  },
+                })
+              }
+            />
 
-      <StatusFilter />
+            <StatusFilter />
+          </div>
+        </div>
+      </section>
 
-      <TodoForm onAddTodo={addTodo} />
+      <section className="todo-panel">
+        <div className="section-heading">
+          <h3>Add a new todo</h3>
+          <p>Create a task and add it to your list.</p>
+        </div>
 
-      <TodoList
-        todoList={todoList}
-        onCompleteTodo={completeTodo}
-        onUpdateTodo={updateTodo}
-        dataVersion={dataVersion}
-        statusFilter={statusFilter}
-      />
-    </div>
+        <TodoForm onAddTodo={addTodo} />
+      </section>
+
+      <section className="todo-list-section">
+        <div className="section-heading">
+          <h3>Your tasks</h3>
+          <p>
+            Click a task title to edit it, use the checkbox to update
+            its status, or delete it when you no longer need it.
+          </p>
+        </div>
+
+        {isTodoListLoading ? (
+          <div className="message-card">
+            <p>Loading todos...</p>
+          </div>
+        ) : (
+          <TodoList
+            todoList={todoList}
+            onCompleteTodo={completeTodo}
+            onUpdateTodo={updateTodo}
+            onDeleteTodo={deleteTodo}
+            dataVersion={dataVersion}
+            statusFilter={statusFilter}
+          />
+        )}
+      </section>
+    </main>
   );
 }
 

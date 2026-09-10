@@ -1,20 +1,41 @@
 import { useState, useRef } from "react";
 import TextInputWithLabel from "../../shared/TextInputWithLabel.jsx";
-import { isValidTodoTitle } from "../../utils/todoValidation.js";
+import {
+  isValidTodoTitle,
+  MAX_TODO_TITLE_LENGTH,
+} from "../../utils/todoValidation.js";
 
 function TodoForm({ onAddTodo }) {
   const [workingTodoTitle, setWorkingTodoTitle] = useState("");
+  const [validationError, setValidationError] = useState("");
 
   const inputRef = useRef();
 
   const handleAddTodo = (event) => {
     event.preventDefault();
 
-    onAddTodo(workingTodoTitle.trim());
+    if (!isValidTodoTitle(workingTodoTitle)) {
+      setValidationError(
+        `Todo must be between 1 and ${MAX_TODO_TITLE_LENGTH} characters.`
+      );
+      return;
+    }
+
+    const trimmedTitle = workingTodoTitle.trim();
+
+    onAddTodo(trimmedTitle);
 
     setWorkingTodoTitle("");
+    setValidationError("");
+    inputRef.current?.focus();
+  };
 
-    inputRef.current.focus();
+  const handleChange = (event) => {
+    setWorkingTodoTitle(event.target.value);
+
+    if (validationError) {
+      setValidationError("");
+    }
   };
 
   return (
@@ -24,8 +45,13 @@ function TodoForm({ onAddTodo }) {
         labelText="Todo"
         ref={inputRef}
         value={workingTodoTitle}
-        onChange={(event) => setWorkingTodoTitle(event.target.value)}
+        onChange={handleChange}
+        maxLength={MAX_TODO_TITLE_LENGTH}
       />
+
+      {validationError && (
+        <p role="alert">{validationError}</p>
+      )}
 
       <button
         type="submit"
