@@ -29,6 +29,11 @@ Screenshots of the application will be added here to demonstrate the main user i
 ![Profile Page](profile.png)
 
 
+### Mobile View
+
+![Mobile View](mobileview.png)
+
+
 
 
 ## Features
