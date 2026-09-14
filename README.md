@@ -10,14 +10,28 @@ A live demo will be added after the application is deployed.
 
 Screenshots of the application will be added here to demonstrate the main user interface, including the login page, todo list, filtering and sorting controls, and profile page.
 
+## Screenshots
+
+### Login Page
+
+![Login Page](login.png)
+
+### Todo Page
+
+![Todo Page](Todopage2.png)
 
 ### About Page
 
 ![About Page](Aboutpage.png)
 
-### Todo Page
+### Profile Page
 
-![Todo Page](Todopage2.png)
+![Profile Page](profile.png)
+
+### Profile
+
+![Profile](pro.png)
+
 
 ## Features
 
