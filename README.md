@@ -1,148 +1,146 @@
-# Todo List App
+# My Todos
 
-## Description
+My Todos is a responsive Todo List application built with React and Vite. It allows authenticated users to create, edit, complete, reopen, delete, search, sort, and filter todos.
 
-A responsive Todo List application built with React. Users can log in, manage their todos, and interact with the application through a clean and user-friendly interface.
+## Live Demo Link
 
-The project demonstrates concepts learned throughout the course, including React state management, reducers, context, authentication, routing, API integration, form validation, and responsive styling.
+A live demo will be added after the application is deployed.
+
+## Screenshots
+
+Screenshots of the application will be added here to demonstrate the main user interface, including the login page, todo list, filtering and sorting controls, and profile page.
 
 ## Features
 
-* User login and authentication
-* Protected routes
+* User authentication
 * Create new todos
-* View existing todos
-* Edit todos
-* Mark todos as completed or active
+* Edit existing todos
+* Complete and reopen todos
 * Delete todos
-* Search todos
-* Filter todos by status
-* Sort todos
-* About page
-* Profile page
-* 404 Not Found page
-* Form validation
-* User-friendly error messages
-* Responsive design for desktop, tablet, and mobile
-* Accessible form controls and interactive elements
-* Input sanitization using DOMPurify
+* Search todos by title
+* Sort todos by title or creation date
+* Sort in ascending or descending order
+* Filter todos by All, Active, or Completed status
+* Todo input validation
+* Profile page with todo statistics
+* Protected routes
+* Custom 404 page
+* Responsive design
+* Loading and error states
+* API error handling
 
-## Technologies
+## Technologies Used
 
 * React
-* JavaScript
-* Vite
 * React Router
-* Context API
-* useReducer
-* DOMPurify
+* Vite
+* JavaScript
 * CSS
+* Context API
+* `useReducer`
 * REST API
+* DOMPurify
 
-## Getting Started
+## Installation
 
-### Prerequisites
-
-* Node.js
-* npm
-
-### Installation
-
-Clone the repository:
-
-```bash
-git clone https://github.com/kavanahegde/todo-list.git
-```
-
-Navigate to the project directory:
-
-```bash
-cd todo-list
-```
-
-Install dependencies:
+Clone the repository and install the dependencies:
 
 ```bash
 npm install
 ```
 
-### Run the Application
+## Run the Development Server
 
-Start the development server:
-
-```bash
-npm run dev
-```
-
-Open the local URL provided by Vite in your browser.
-
-## Available Scripts
+Start the application:
 
 ```bash
 npm run dev
 ```
 
-Starts the development server.
+Open the application in your browser:
+
+```text
+http://localhost:3001/
+```
+
+## Available Pages
+
+* `/about` — Information about the application
+* `/login` — User login
+* `/todos` — Todo management
+* `/profile` — Account information and todo statistics
+* Any unknown route displays the custom 404 page
+
+## Todo Functionality
+
+Authenticated users can:
+
+1. Add a todo.
+2. Edit a todo by clicking its title.
+3. Mark a todo as completed.
+4. Reopen a completed todo.
+5. Delete a todo.
+6. Search todos by title.
+7. Sort todos by title or creation date.
+8. Filter todos by All, Active, or Completed status.
+
+## Validation and Security
+
+Todo titles are validated before they are submitted. Empty or invalid todo titles cannot be added or updated.
+
+Todo titles are also sanitized with DOMPurify before being rendered to help prevent unsafe HTML from being inserted into the application.
+
+The application uses protected routes and authentication state to restrict access to authenticated todo functionality.
+
+## Loading and Error Handling
+
+The application provides loading indicators while data is being retrieved or operations are being processed.
+
+User-friendly error messages are displayed when API requests or other operations fail.
+
+## Design Decisions
+
+The application uses a clean, responsive layout with consistent spacing, typography, buttons, forms, and status indicators.
+
+React Router was used to organize navigation and protected routes. Context API and `useReducer` were used to manage authentication and todo-related state in a structured way.
+
+The interface was designed to keep common todo actions easy to find while providing clear feedback for loading, empty, and error states.
+
+Responsive CSS allows the application to adapt to different screen sizes and devices.
+
+## Quality Checks
+
+Run the linter:
 
 ```bash
 npm run lint
 ```
 
-Runs the project's linting checks.
+Create a production build:
 
 ```bash
 npm run build
 ```
 
-Creates a production build of the application.
-
-## Design Decisions
-
-The application uses a clean and simple layout to make managing todos easy.
-
-React Context and `useReducer` are used to organize application state and make state updates predictable. React Router is used for navigation and protected routes.
-
-The interface uses consistent spacing, typography, buttons, forms, and visual states to provide a professional user experience.
-
-The layout is responsive so that the application can be used on desktop, tablet, and mobile screen sizes.
-
-## Security and Validation
-
-* User input is validated on the client side.
-* Todo input has length restrictions.
-* DOMPurify is used to sanitize user-provided content.
-* Error messages are designed to avoid exposing unnecessary system information.
-* Protected routes prevent unauthorized access to authenticated pages.
-
-## Screenshots
-
-### Desktop
-
-*Add a screenshot of your application here.*
-
-### Mobile
-
-*Add a screenshot of your responsive mobile layout here.*
+The final project passes the lint check with 0 warnings and 0 errors and builds successfully with Vite.
 
 ## Future Improvements
 
-* Add additional todo categories
-* Add due dates and reminders
-* Improve accessibility testing
-* Add automated tests
-* Add additional user customization options
+Possible future improvements include:
 
-## Live Demo
-locally for demonstration.
+* Adding due dates and reminders for todos
+* Adding todo categories or tags
+* Adding drag-and-drop task organization
+* Improving accessibility features
+* Adding additional user profile settings
+* Deploying the application with a live production API configuration
 
-## Repository
+## License Information
 
-GitHub: https://github.com/kavanahegde/todo-list
+This project was created as part of a coding course and educational portfolio. It is intended for educational and demonstration purposes.
 
-## License
+## Contact Information
 
-This project was created as part of the Lesson 11 final project.
+**Kavana Hegde**
 
-## Contact
-
-Kavana Hegde
+GitHub: https://github.com/kavanahegde
