@@ -133,12 +133,7 @@ The layout is responsive so that the application can be used on desktop, tablet,
 * Add additional user customization options
 
 ## Live Demo
-
-If deployed, add your Vercel URL here.
-
-If the application is not deployed, you can remove this section or write:
-
-> The application is currently run locally for demonstration.
+locally for demonstration.
 
 ## Repository
 
