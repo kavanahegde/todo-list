@@ -2,14 +2,6 @@
 
 My Todos is a responsive Todo List application built with React and Vite. It allows authenticated users to create, edit, complete, reopen, delete, search, sort, and filter todos.
 
-## Live Demo Link
-
-A live demo will be added after the application is deployed.
-
-## Screenshots
-
-Screenshots of the application will be added here to demonstrate the main user interface, including the login page, todo list, filtering and sorting controls, and profile page.
-
 ## Screenshots
 
 ### Login Page
@@ -28,13 +20,9 @@ Screenshots of the application will be added here to demonstrate the main user i
 
 ![Profile Page](profile.png)
 
-
 ### Mobile View
 
 ![Mobile View](mobileview.png)
-
-
-
 
 ## Features
 
@@ -65,7 +53,6 @@ Screenshots of the application will be added here to demonstrate the main user i
 * Context API
 * `useReducer`
 * REST API
-* DOMPurify
 
 ## Installation
 
@@ -113,8 +100,6 @@ Authenticated users can:
 ## Validation and Security
 
 Todo titles are validated before they are submitted. Empty or invalid todo titles cannot be added or updated.
-
-Todo titles are also sanitized with DOMPurify before being rendered to help prevent unsafe HTML from being inserted into the application.
 
 The application uses protected routes and authentication state to restrict access to authenticated todo functionality.
 
