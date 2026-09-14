@@ -40,7 +40,10 @@ My Todos is a responsive Todo List application built with React and Vite. It all
 * Protected routes
 * Custom 404 page
 * Responsive design
-* Loading and error handling
+* Loading states
+* Disabled states
+* Error handling
+* API error handling
 
 ## Technologies Used
 
@@ -58,6 +61,8 @@ My Todos is a responsive Todo List application built with React and Vite. It all
 Clone the repository and install the dependencies:
 
 ```bash
+git clone https://github.com/kavanahegde/todo-list.git
+cd todo-list
 npm install
 ```
 
@@ -65,7 +70,7 @@ npm install
 
 ### `npm run dev`
 
-Starts the development server.
+Starts the Vite development server.
 
 ### `npm run build`
 
@@ -87,76 +92,106 @@ Start the application:
 npm run dev
 ```
 
-Open the application in your browser:
-
-```text
-http://localhost:3001/
-```
+Vite will display the local URL in the terminal. Open that URL in your browser.
 
 ## Available Pages
 
-* `/about` — Information about the application
-* `/login` — User login
-* `/todos` — Todo management
-* `/profile` — Account information and todo statistics
-* Any unknown route displays the custom 404 page
+* `/about` — About page
+* `/login` — Login page
+* `/todos` — Todo list page
+* `/profile` — User profile and todo statistics
+* Unknown routes — Custom 404 page
 
 ## Todo Functionality
 
 Authenticated users can:
 
-1. Add a todo.
-2. Edit a todo by clicking its title.
-3. Mark a todo as completed.
-4. Reopen a completed todo.
-5. Delete a todo.
-6. Search todos by title.
-7. Sort todos by title or creation date.
-8. Filter todos by All, Active, or Completed status.
+1. Add todos
+2. Edit todos
+3. Complete todos
+4. Reopen completed todos
+5. Delete todos
+6. Search todos
+7. Sort todos by title or creation date
+8. Change sort direction
+9. Filter todos by All, Active, or Completed
 
-## Validation and Error Handling
+## Validation
 
-Todo titles are validated before they are submitted. Empty or invalid todo titles cannot be added or updated.
+Todo titles are validated before submission. Empty or invalid todo titles are blocked, and a maximum length limit is enforced.
 
-The application also displays user-friendly error messages when API operations fail.
+## Authentication and Security
 
-Loading states and disabled states provide feedback while operations are being processed.
+The application uses protected routes and authenticated API requests. Authentication state is managed through React Context.
+
+The project also includes a `vercel.json` configuration for API rewrites required for production deployment.
+
+## Loading, Empty, and Error States
+
+The application provides:
+
+* Loading indicators while data is being fetched
+* Disabled controls during applicable operations
+* User-friendly API error messages
+* Empty-list feedback
+* Filter-specific empty-state feedback
 
 ## Design Decisions
 
-The application uses React Router to organize navigation and protected routes.
+* **React Router** is used for navigation and protected routes.
+* **Context API and `useReducer`** are used to manage authentication and todo state.
+* The application is organized into reusable React components to make the code easier to maintain.
+* Consistent spacing, typography, buttons, forms, and status indicators are used throughout the application.
+* Responsive CSS allows the application to work across desktop and mobile screen sizes.
 
-Context API and `useReducer` are used to manage authentication and todo-related state in a structured way.
+## Accessibility
 
-The interface uses reusable components, consistent spacing, typography, buttons, forms, and status indicators to create a clear and responsive user experience.
+The application includes:
 
-The layout is designed to work across desktop and mobile screen sizes.
+* Keyboard-friendly controls
+* Clear form labels
+* Button-based actions
+* Focus states
+* Readable visual hierarchy
+* Responsive layouts
 
-## Loading and Empty States
+## Production Deployment Configuration
 
-The application provides loading indicators while data is being retrieved or operations are being processed.
+The project includes a `vercel.json` file containing the configuration needed for production deployment and API rewrites.
 
-Empty todo lists provide feedback to users when there are no todos to display.
+There is currently no public live demo because the application has not been deployed to a public hosting URL.
 
-Error messages are displayed when API requests or other operations fail.
+## Quality Checks
+
+The project was tested using:
+
+```bash
+npm run lint
+npm run build
+```
+
+The project passes linting with **0 warnings and 0 errors**, and the production build completes successfully.
 
 ## Future Improvements
 
 Possible future improvements include:
 
-* Adding due dates and reminders for todos
-* Adding todo categories or tags
-* Adding drag-and-drop task organization
-* Improving accessibility features
-* Adding additional user profile settings
-* Deploying the application with a live production API configuration
+* Adding due dates and reminders
+* Adding categories or tags
+* Drag-and-drop todo organization
+* Additional profile settings
+* Further keyboard accessibility improvements
+* More detailed filter-specific empty states
+* Deploying a public production version
 
 ## License Information
 
-This project was created as part of a coding course and educational portfolio. It is intended for educational and demonstration purposes.
+This project was created for educational and portfolio purposes as part of a coding course.
+
+No separate open-source license is currently specified.
 
 ## Contact Information
 
 **Kavana Hegde**
 
-GitHub: https://github.com/kavanahegde
+GitHub: https://github.com/kavanahegde/todo-list
