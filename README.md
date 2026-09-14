@@ -28,9 +28,7 @@ Screenshots of the application will be added here to demonstrate the main user i
 
 ![Profile Page](profile.png)
 
-### Profile
 
-![Profile](pro.png)
 
 
 ## Features
