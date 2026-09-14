@@ -4,6 +4,8 @@ My Todos is a responsive Todo List application built with React and Vite. It all
 
 ## Screenshots
 
+The following screenshots show the styled application on both desktop and mobile screen sizes.
+
 ### Desktop Screenshots
 
 #### Login Page
@@ -159,9 +161,9 @@ The application includes:
 
 ## Live Demo
 
-The application is deployed on Vercel:
+The application is not currently deployed.
 
-**Live Demo:** `ADD YOUR VERCEL URL HERE`
+The project includes a `vercel.json` configuration for production deployment and API rewrites.
 
 ## Production Deployment Configuration
 
