@@ -4,26 +4,23 @@ My Todos is a responsive Todo List application built with React and Vite. It all
 
 ## Screenshots
 
-### Login Page
+### Desktop Screenshots
 
-![Login Page](./login.png)
+#### Login Page
+![Desktop Login Page](./login.png)
 
-### Todo Page
+#### Todo Page
+![Desktop Todo Page](./Todopage2.png)
 
-![Todo Page](./Todopage2.png)
+#### About Page
+![Desktop About Page](./Aboutpage.png)
 
-### About Page
+#### Profile Page
+![Desktop Profile Page](./profile.png)
 
-![About Page](./Aboutpage.png)
+### Mobile Screenshot
 
-### Profile Page
-
-![Profile Page](./profile.png)
-
-### Mobile View
-
-![Mobile View](./mobileview.png)
-
+![Mobile Todo Application](./mobileview.png)
 ## Features
 
 * User authentication
