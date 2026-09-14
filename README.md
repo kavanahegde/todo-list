@@ -7,20 +7,25 @@ My Todos is a responsive Todo List application built with React and Vite. It all
 ### Desktop Screenshots
 
 #### Login Page
+
 ![Desktop Login Page](./login.png)
 
 #### Todo Page
+
 ![Desktop Todo Page](./Todopage2.png)
 
 #### About Page
+
 ![Desktop About Page](./Aboutpage.png)
 
 #### Profile Page
+
 ![Desktop Profile Page](./profile.png)
 
 ### Mobile Screenshot
 
 ![Mobile Todo Application](./mobileview.png)
+
 ## Features
 
 * User authentication
@@ -152,11 +157,15 @@ The application includes:
 * Readable visual hierarchy
 * Responsive layouts
 
+## Live Demo
+
+The application is deployed on Vercel:
+
+**Live Demo:** `ADD YOUR VERCEL URL HERE`
+
 ## Production Deployment Configuration
 
 The project includes a `vercel.json` file containing the configuration needed for production deployment and API rewrites.
-
-There is currently no public live demo because the application has not been deployed to a public hosting URL.
 
 ## Quality Checks
 
@@ -179,13 +188,12 @@ Possible future improvements include:
 * Additional profile settings
 * Further keyboard accessibility improvements
 * More detailed filter-specific empty states
-* Deploying a public production version
 
-## License Information
+## License
 
-This project was created for educational and portfolio purposes as part of a coding course.
+This project is licensed under the MIT License.
 
-No separate open-source license is currently specified.
+See the [LICENSE](./LICENSE) file for the complete license text.
 
 ## Contact Information
 
